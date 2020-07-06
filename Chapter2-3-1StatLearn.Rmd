@@ -1,0 +1,124 @@
+#assigning value to a variable
+x = c(1, 3, 2, 5)
+x
+x = c(1, 6, 2)
+x
+y = c(1, 4, 3)
+#adding variables add the numbers in the same position as the other variable. must have the same number of variables
+x + y
+#return a list of all objects and variables
+ls()
+#remove all established variables and objects
+rm(list = ls())
+#create a matrix
+x = matrix(data = c(1, 2, 3, 4),
+           nrow = 2,
+           ncol = 2)
+x
+#populate the matrix in order of the rows
+matrix(c(1, 2, 3, 4), 2, 2, byrow = TRUE)
+#square roots and square the matrix
+sqrt(x)
+x ^ 2
+#a vector of random variables with correlation function
+x = rnorm(50)
+y = x + rnorm(50, mean = 50, sd = .1)
+cor(x, y)
+set.seed(1303)
+rnorm(50)
+set.seed(3)
+y = rnorm(100)
+mean(y)
+var(y)
+sqrt(var(y))
+sd(y)
+#chapter 2.3.2 Graphics
+#create a scatterplot
+x = rnorm(100)
+y = rnorm(100)
+plot(x, y)
+plot(x,
+     y,
+     xlab = 'this is the x-axis',
+     ylab = 'this is the y-axis',
+     main = 'Plot of X vs Y')
+pdf('figure.pdf')
+plot(x, y, col = 'green')
+dev.off()
+#create a sequence
+x = seq(1, 10)
+x
+x = 1:10
+x
+x = seq(-pi, pi, length = 50)
+x
+#create a contour plot
+y = x
+f = outer(x, y, function(x, y)
+  cos(y) / (1 + x ^ 2))
+contour(x, y, f)
+contour(x, y, f, nlevels = 45, add = T)
+fa = (f - t(f)) / 2
+contour(x, y, fa, nlevels = 15)
+#produce a three-dimensional plot.
+image(x, y, fa)
+persp(x, y, fa)
+persp(x, y, fa, theta = 30)
+persp(x, y, fa, theta = 30, phi = 20)
+persp(x, y, fa, theta = 30, phi = 70)
+persp(x, y, fa, theta = 30, phi = 40)
+#Chapter 2.3.3 Indexing Data
+A = matrix(1:16, 4, 4)
+A
+A[2, 3]
+#select multiple row and columns at a time
+A[c(1, 3), c(2, 4)]
+A[1:3, 2:4]
+A[1:2, ]
+A[, 1:2]
+A[1, ]
+#keep all rows or columns except those indicated in the index
+A[-c(1, 3), ]
+A[-c(1, 3), -c(1, 3, 4)]
+#output the number of rows followed by the number of columns of a given  matrix
+dim(A)
+#Chapter 2.3.4 Loading Data
+Auto = read.csv("Auto.csv", header = T, na.strings = "?")
+#fix(Auto)
+dim(Auto)
+Auto[1:4, ]
+#omit rows with null variables
+Auto = na.omit(Auto)
+dim(Auto)
+#view variable names
+names(Auto)
+#2.3.5 Additional Graphical and NumericalSummaries
+#plot variables
+#set directory
+setwd("~/Downloads")
+plot(Auto$cylinders, Auto$mpg)
+#attach(Auto)
+#plot(cylinders, mpg)
+#convert quants to qual variables
+cylinders = as.factor(cylinders)
+#then plot should turn into boxplot
+plot(cylinders, mpg)
+plot(
+  cylinders,
+  mpg,
+  col = "red",
+  varwidth = T,
+  xlab = "cylinders",
+  ylab = "MPG"
+)
+hist(mpg, col = 2, breaks = 15)
+#scatterplot matrix
+pairs(Auto)
+pairs( ~ mpg + displacement + horsepower + weight + acceleration, Auto)
+#id the value for a selected variable for points on a plot
+plot(horsepower, mpg)
+identify(horsepower, mpg, name)
+summary(Auto)
+summary(mpg)
+savehistory()
+
