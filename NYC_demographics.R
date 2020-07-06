@@ -1,0 +1,17 @@
+setwd("~/RstudioProjects")
+NYCdemos = read.csv("Demographic_Statistics_By_Zip_Code.csv")
+View(NYCdemos)
+library(dplyr)
+names(dplyr::select_if(NYCdemos,is.numeric))
+names(NYCdemos)
+#attach(NYCdemos)
+summary(COUNT.PARTICIPANTS)
+sum(COUNT.PARTICIPANTS)
+jurisdiction.name = as.factor(JURISDICTION.NAME)
+#rm(list = ls())
+#count number of observations
+length(jurisdiction.name)
+#count the number of distinct obs
+distinct(NYCdemos, JURISDICTION.NAME, .keep_all = FALSE)
+summary(NYCdemos)
+top_n(NYCdemos, 20, PERCENT.BLACK.NON.HISPANIC)
